@@ -12,10 +12,14 @@ class NANO_TUBES: public hom3d::StrengthHomProblem{
 	virtual void mesh(){
 		fromNeuFile("nanotubes.neu");
 	}
-	virtual void phases(){
-		addElasticIsotropicPhase(3.01e9,0.394);
-		addElasticIsotropicPhase(76e9,0.23);
-	}
+        virtual void phases(){
+                addElasticIsotropicPhase(3.01e9,0.394);
+                addHoffmanStrengthCriterium(7e6,8.1e6,3.06e6);
+
+                addElasticIsotropicPhase(76e9,0.23);
+                addHoffmanStrengthCriterium(76e6,84.1e6,38.06e6);
+
+        }
 	virtual void strenPaths(){
 		addStardartPaths();
 	}
@@ -29,8 +33,8 @@ class CERAMIC_AL2O3: public hom3d::StrengthHomProblem{
 	}
 	virtual void phases(){
 		//matrix
-		addElasticIsotropicPhase(1.99992e9,0.36);
-		addHoffmanStrengthCriterium(75e6,83.1e6,37.06e6);
+                addElasticIsotropicPhase(3.01e9,0.394);
+                addHoffmanStrengthCriterium(7e6,8.1e6,3.06e6);
 		
 		//nanotubes
 		NANO_TUBES* pr = new NANO_TUBES();
